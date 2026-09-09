@@ -25,6 +25,7 @@
 ##### Bug Fixes
 
 - Decode projects that declare the `com.apple.product-type.tool.host-build` product type (Tuist ≥ 4.206.0) by updating XcodeProj to 9.16.0.
+  SwiftPM only: the Bazel build still resolves XcodeProj 9.10.1 because 9.16.0 is not published in the Bazel Central Registry, so `bazel build` cannot compile this fork.
 
 ## 3.8.0 (2026-07-25)
 
