@@ -1,4 +1,16 @@
-## master
+## 3.8.1-occam.1
+
+##### Breaking
+
+- None.
+
+##### Enhancements
+
+- None.
+
+##### Bug Fixes
+
+- Decode projects that declare the `com.apple.product-type.tool.host-build` product type (Tuist ≥ 4.206.0) by updating XcodeProj to 9.16.0.
 
 ##### Breaking
 

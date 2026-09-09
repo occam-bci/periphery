@@ -60,7 +60,7 @@ public final class XcodeWorkspace: XcodeProjectlike {
                 if fullPath.extension == "xcodeproj", shouldLoadProject(fullPath) {
                     paths.append(fullPath)
                 }
-            case let .group(group):
+            case let .group(group), let .fileSystemSynchronizedGroup(group):
                 paths += collectProjectPaths(in: group.children, groups: groups + [group])
             }
         }
