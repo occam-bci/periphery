@@ -1,1 +1,1 @@
-let PeripheryVersion = "3.8.1-occam.1"
+let PeripheryVersion = "3.8.1"

@@ -1,6 +1,6 @@
 #!/bin/bash
 #MISE description="Build and package an ad-hoc-signed arm64 release zip for the occam-bci fork"
-#USAGE arg "<version>" help="Release version, e.g. 3.8.1-occam.1"
+#USAGE arg "<version>" help="Release version, e.g. 3.8.1"
 
 set -eo pipefail
 
