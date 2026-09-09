@@ -1,0 +1,30 @@
+#!/bin/bash
+#MISE description="Build and package an ad-hoc-signed arm64 release zip for the occam-bci fork"
+#USAGE arg "<version>" help="Release version, e.g. 3.8.1"
+
+set -eo pipefail
+
+version="${usage_version?}"
+developer_dir="$(xcode-select -p)"
+toolchain_lib_dir="${developer_dir}/Toolchains/XcodeDefault.xctoolchain/usr/lib"
+build_flags=(--product periphery --configuration release --disable-sandbox --scratch-path .build --arch arm64)
+
+sed "s/__VERSION__/${version}/" .mise/tasks/scripts/Version.swift.template > Sources/Frontend/Version.swift
+
+rm -rf .release
+mkdir .release
+swift build "${build_flags[@]}" -Xswiftc -cross-module-optimization
+cp "$(swift build "${build_flags[@]}" --show-bin-path)/periphery" .release/
+cp "${toolchain_lib_dir}/libIndexStore.dylib" .release/
+cp LICENSE.md .release/
+
+swift_stdlib_rpath="$(otool -l .release/periphery | awk '/LC_RPATH/ {r=1; next} r && /path / {print $2; r=0}' | grep "^${toolchain_lib_dir}/swift-" | head -1)"
+install_name_tool -delete_rpath "${toolchain_lib_dir}" .release/periphery
+install_name_tool -delete_rpath "${swift_stdlib_rpath}" .release/periphery
+strip -rSTX .release/periphery
+codesign --force -s - .release/libIndexStore.dylib
+codesign --force -s - .release/periphery
+
+(cd .release && zip -q -r "periphery-${version}.zip" periphery libIndexStore.dylib LICENSE.md)
+.release/periphery version
+shasum -a 256 ".release/periphery-${version}.zip"

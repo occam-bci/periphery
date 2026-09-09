@@ -1,0 +1,39 @@
+diff --git a/BUILD.bazel b/BUILD.bazel
+new file mode 100644
+index 0000000..2970058
+--- /dev/null
++++ b/BUILD.bazel
+@@ -0,0 +1,17 @@
++load("@rules_swift//swift:swift.bzl", "swift_library")
++
++swift_library(
++    name = "XcodeProj",
++    srcs = glob(["Sources/XcodeProj/**/*.swift"]),
++    visibility = ["//visibility:public"],
++    deps = [
++        "@aexml//:AEXML",
++        "@pathkit//:PathKit",
++    ],
++)
++
++alias(
++    name = "xcodeproj",
++    actual = ":XcodeProj",
++    visibility = ["//visibility:public"],
++)
+diff --git a/MODULE.bazel b/MODULE.bazel
+new file mode 100644
+index 0000000..e58c04a
+--- /dev/null
++++ b/MODULE.bazel
+@@ -0,0 +1,10 @@
++module(
++    name = "xcodeproj",
++    version = "9.16.0",
++    compatibility_level = 1,
++    bazel_compatibility = [">=7.2.1"],
++)
++
++bazel_dep(name = "rules_swift", version = "2.3.0", max_compatibility_level = 3)
++bazel_dep(name = "aexml", version = "4.7.0.1")
++bazel_dep(name = "pathkit", version = "1.0.1.1")
