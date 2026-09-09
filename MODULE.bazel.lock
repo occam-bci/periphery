@@ -215,8 +215,6 @@
     "https://bcr.bazel.build/modules/swift_argument_parser/1.7.0/MODULE.bazel": "40d4e44950e44973dcf8590bcee637591de196b5dbe3696d07eb342b74d53672",
     "https://bcr.bazel.build/modules/swift_argument_parser/1.7.0/source.json": "b9b952cba0c748083b9b891e6ac46d347c92d37e8a92ead96d2a54b966bacd87",
     "https://bcr.bazel.build/modules/upb/0.0.0-20220923-a547704/MODULE.bazel": "7298990c00040a0e2f121f6c32544bab27d4452f80d9ce51349b1a28f3005c43",
-    "https://bcr.bazel.build/modules/xcodeproj/9.10.1/MODULE.bazel": "4344389d70afbf9dd3f8c7bb677656954e3c4f896a5e133a2b5fca13fef84312",
-    "https://bcr.bazel.build/modules/xcodeproj/9.10.1/source.json": "9525f3c3bc496d371ee3024d54b70b79b17f69b85df7bb42f1bd38dd3c7fbd69",
     "https://bcr.bazel.build/modules/yams/6.2.1/MODULE.bazel": "a5c2e6da3dd3d7d0991e43d1733f93e25fb29a392df9765c5c6f9ffbde1b026b",
     "https://bcr.bazel.build/modules/yams/6.2.1/source.json": "7ca7bcdd196777ce9a7889844e6862794607fc89d55d14c56d36b6742df6e0ad",
     "https://bcr.bazel.build/modules/zlib/1.2.11/MODULE.bazel": "07b389abc85fdbca459b69e2ec656ae5622873af3f845e1c9d80fe179f3effa0",
@@ -496,8 +494,8 @@
     },
     "@@swift-index-store+//:repositories.bzl%bzlmod_deps": {
       "general": {
-        "bzlTransitiveDigest": "5SgzvK5bW1AjBEGcIZ+V8t1hdrKQxcL5liC+blXrOeo=",
-        "usagesDigest": "6gSsMFoZD8MOT1d3qLGp8z92CBXKqQI0zULrhGHXrow=",
+        "bzlTransitiveDigest": "lQ53e8CJVUhAUlLtQHBMA6CHnfoEVqLeN/PpMp0m9jw=",
+        "usagesDigest": "f8v90Z0jhAD//t5+/A2VQp2N8NISaI/oFgntRKckdYI=",
         "recordedInputs": [
           "REPO_MAPPING:swift-index-store+,bazel_tools bazel_tools"
         ],
@@ -509,6 +507,10 @@
               "sha256": "da69bab932357a817aa0756e400be86d7156040bfbea8eded7a3acc529320731",
               "build_file_content": "\nload(\"@build_bazel_rules_apple//apple:apple.bzl\", \"apple_static_xcframework_import\")\n\napple_static_xcframework_import(\n    name = \"libIndexStore\",\n    visibility = [\"//visibility:public\"],\n    xcframework_imports = glob([\"libIndexStore.xcframework/**\"]),\n)\n        "
             }
+          },
+          "LinuxIndexStore": {
+            "repoRuleId": "@@swift-index-store+//:repositories.bzl%_linux_indexstore",
+            "attributes": {}
           }
         }
       }

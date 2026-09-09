@@ -19,8 +19,17 @@ bazel_dep(name = "swift-index-store", version = "1.10.0")
 bazel_dep(name = "swift-syntax", version = "603.0.0.bcr.1")
 bazel_dep(name = "swift-system", version = "1.6.4.bcr.1")
 bazel_dep(name = "pathkit", version = "1.0.1.1")
-bazel_dep(name = "xcodeproj", version = "9.10.1")
+bazel_dep(name = "xcodeproj", version = "9.16.0")
 bazel_dep(name = "yams", version = "6.2.1")
+
+archive_override(
+    module_name = "xcodeproj",
+    integrity = "sha256-E52x/p34WsdKbJ6wElgtdVzD93KEw2lHb5dwmNB9txY=",
+    patch_strip = 1,
+    patches = ["//bazel/xcodeproj:add_module_and_build_files.patch"],
+    strip_prefix = "XcodeProj-9.16.0",
+    urls = ["https://github.com/tuist/XcodeProj/archive/refs/tags/9.16.0.tar.gz"],
+)
 
 # Generated repo
 use_repo(use_extension("//bazel:generated.bzl", "generated"), "periphery_generated")
