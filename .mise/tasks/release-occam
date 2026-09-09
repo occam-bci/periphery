@@ -7,14 +7,14 @@ set -eo pipefail
 version="${usage_version?}"
 developer_dir="$(xcode-select -p)"
 toolchain_lib_dir="${developer_dir}/Toolchains/XcodeDefault.xctoolchain/usr/lib"
-build_flags="--product periphery --configuration release --disable-sandbox --scratch-path .build --arch arm64"
+build_flags=(--product periphery --configuration release --disable-sandbox --scratch-path .build --arch arm64)
 
 sed "s/__VERSION__/${version}/" .mise/tasks/scripts/Version.swift.template > Sources/Frontend/Version.swift
 
 rm -rf .release
 mkdir .release
-swift build ${build_flags} -Xswiftc -cross-module-optimization
-cp "$(swift build ${build_flags} --show-bin-path)/periphery" .release/
+swift build "${build_flags[@]}" -Xswiftc -cross-module-optimization
+cp "$(swift build "${build_flags[@]}" --show-bin-path)/periphery" .release/
 cp "${toolchain_lib_dir}/libIndexStore.dylib" .release/
 cp LICENSE.md .release/
 
